@@ -7,7 +7,7 @@ TEMPERATURE: 0.0
 REQUEST_INTERVAL: 3
 
 # Gemini Model Settings
-GEMINI_API_KEY: "AIzaSyAyXqaYTDg168vp7h3amyyqaOpdKQpWATA"
+GEMINI_API_KEY: "AI-"
 GEMINI_MODEL_NAME: "gemini-1.5-flash" # Or your preferred Gemini vision model (e.g., gemini-1.5-pro-latest)
 
 # DASHSCOPE_API_KEY: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
