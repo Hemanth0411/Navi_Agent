@@ -1,6 +1,6 @@
 # NewAgent
 
-A Python-based agent framework for autonomous exploration and interaction with Android applications.
+A Python-based agent framework for autonomous exploration and interaction with Android applications. This project is based on and inspired by [AppAgent](https://github.com/TencentQQGYLab/AppAgent), which automates interactions with Android apps using computer vision, UI element analysis, and NLP.
 
 ## Project Structure
 
