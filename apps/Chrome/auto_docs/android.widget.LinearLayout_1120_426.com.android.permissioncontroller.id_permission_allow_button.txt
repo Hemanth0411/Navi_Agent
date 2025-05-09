@@ -1,0 +1,1 @@
+UI element 2 (Don't allow): Dismiss a notification request.

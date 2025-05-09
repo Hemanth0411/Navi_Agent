@@ -1,0 +1,1 @@
+UI element 5 ("No thanks"): Dismisses the Chrome notification prompt requesting permission to send notifications, but does not prevent future prompts.  UI element 4 ("Don't allow"): Permanently disables Chrome notifications.

@@ -1,0 +1,1 @@
+UI element 39: Initiate a Google search using a suggested search query.

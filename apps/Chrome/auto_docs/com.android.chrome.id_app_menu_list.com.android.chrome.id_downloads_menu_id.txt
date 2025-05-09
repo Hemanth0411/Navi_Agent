@@ -1,0 +1,1 @@
+UI element 10 (Download): Access the device's download manager to view and manage downloaded files.

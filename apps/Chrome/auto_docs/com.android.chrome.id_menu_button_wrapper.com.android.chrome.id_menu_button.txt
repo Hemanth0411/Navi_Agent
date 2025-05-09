@@ -1,0 +1,1 @@
+Element 19 (Search bar):  Initiates a search or URL entry.
