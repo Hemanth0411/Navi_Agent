@@ -4,6 +4,7 @@ import shlex # For parsing command strings safely
 import xml.etree.ElementTree as ET
 from .config import load_config # Use relative import for sibling module
 from .utils import print_with_color # Use relative import for sibling module
+import time
 
 configs = load_config()
 
@@ -395,6 +396,89 @@ class AndroidController:
     # --- Other Control Methods ---
     def open_notifications(self):
         return self._execute_command(["shell", "cmd", "statusbar", "expand-notifications"])[0]
+
+    def swipe(self, start_x: int, start_y: int, end_x: int, end_y: int, duration: int = 500) -> bool:
+        """Perform a swipe gesture on the screen.
+        
+        Args:
+            start_x (int): Starting X coordinate
+            start_y (int): Starting Y coordinate
+            end_x (int): Ending X coordinate
+            end_y (int): Ending Y coordinate
+            duration (int): Duration of swipe in milliseconds (default: 500)
+            
+        Returns:
+            bool: True if swipe was successful, False otherwise
+        """
+        try:
+            cmd = f"input swipe {start_x} {start_y} {end_x} {end_y} {duration}"
+            self._execute_command(cmd.split())
+            return True
+        except Exception as e:
+            print_with_color(f"Error performing swipe: {e}", "red")
+            return False
+
+    def is_app_running(self, package_name: str) -> bool:
+        """Check if the specified app is currently running.
+        
+        Args:
+            package_name (str): The package name of the app to check
+            
+        Returns:
+            bool: True if the app is running, False otherwise
+        """
+        try:
+            # Use ps command to check if the app process is running
+            cmd = f"adb -s {self.device} shell ps | grep {package_name}"
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            return package_name in result.stdout
+        except Exception as e:
+            print_with_color(f"Error checking if app is running: {e}", "red")
+            return False
+
+def launch_app_by_package(package_name: str) -> bool:
+    """
+    Launch an Android app using its package name.
+    
+    Args:
+        package_name (str): The package name of the app to launch
+        
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    try:
+        # First check if the package exists
+        stdout, err = _run_adb_command_base(None, ["shell", "pm", "list", "packages", package_name])
+        if err or package_name not in stdout:
+            print_with_color(f"Package {package_name} not found on device", "red")
+            return False
+
+        # Try to stop the app if it's running
+        _run_adb_command_base(None, ["shell", "am", "force-stop", package_name])
+        time.sleep(1)  # Wait for app to stop
+        
+        # Launch the app using package name
+        stdout, err = _run_adb_command_base(None, ["shell", "monkey", "-p", package_name, 
+                                                  "-c", "android.intent.category.LAUNCHER", "1"])
+        
+        if err:
+            print_with_color(f"Error launching app {package_name}: {err}", "red")
+            return False
+            
+        time.sleep(2)  # Wait for app to launch
+        
+        # Verify the app is running
+        stdout, err = _run_adb_command_base(None, ["shell", "ps", "|", "grep", package_name])
+        if err or package_name not in stdout:
+            print_with_color(f"Failed to verify {package_name} is running", "red")
+            return False
+            
+        print_with_color(f"Successfully launched {package_name}", "green")
+        return True
+        
+    except Exception as e:
+        print_with_color(f"Error launching app {package_name}: {e}", "red")
+        return False
 
 # Keep the old swipe method name for compatibility with self_explorer.py for now.
 # It was: swipe(self, x, y, direction, dist="medium", quick=False)

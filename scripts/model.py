@@ -4,7 +4,7 @@ import requests
 import dashscope
 from dashscope import MultiModalConversation
 from http import HTTPStatus
-from typing import List
+from typing import List, Any
 import google.generativeai as genai # Added for Gemini
 from PIL import Image # Added for Gemini image handling
 
@@ -102,11 +102,13 @@ class QwenModel(BaseModel):
 
 # Added GeminiModel class
 class GeminiModel(BaseModel):
-    def __init__(self, api_key: str, model_name: str):
+    def __init__(self, api_key: str, model_name: str = "gemini-pro"):
+        """Initialize Gemini model with API key and model name."""
         super().__init__()
-        genai.configure(api_key=api_key)
+        self.api_key = api_key
+        self.model_name = model_name
         self.model = genai.GenerativeModel(model_name)
-        # Assuming model_name is something like 'gemini-pro-vision' or 'gemini-1.5-pro-latest'
+        genai.configure(api_key=api_key)
 
     def get_model_response(self, prompt: str, image_paths: List[str]) -> tuple[bool, str]:
         print_with_color(f"Sending request to Gemini ({self.model.model_name})...", "yellow")
@@ -159,6 +161,15 @@ class GeminiModel(BaseModel):
                 error_message = f"An unexpected error occurred with Gemini API: {e.message}"
             print_with_color(error_message, "red")
             return False, error_message
+
+    def generate_content(self, prompt: str) -> Any:
+        """Generate content using Gemini model."""
+        try:
+            response = self.model.generate_content(prompt)
+            return response
+        except Exception as e:
+            print_with_color(f"Error generating content with Gemini: {e}", "red")
+            raise
 
 def parse_explore_rsp(rsp):
     try:

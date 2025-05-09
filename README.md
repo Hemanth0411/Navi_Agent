@@ -1,22 +1,27 @@
 # NewAgent
 
-A Python-based agent framework for autonomous exploration and interaction with Android applications.
+A Python-based agent framework for autonomous exploration and interaction with Android applications. This project is based on and inspired by [AppAgent](https://github.com/TencentQQGYLab/AppAgent), which automates interactions with Android apps using computer vision, UI element analysis, and NLP.
 
 ## Project Structure
 
 ```
 NewAgent/
-├── apps/               # Directory for app-specific data and documentation
-├── scripts/           # Core functionality scripts
-│   ├── and_controller.py
-│   ├── config.py
-│   ├── model.py
-│   ├── prompts.py
-│   └── utils.py
-├── config.yaml        # Configuration settings
-├── learn.py          # Main script for autonomous exploration
-├── requirements.txt   # Project dependencies
-└── LICENSE           # MIT License
+├── apps/ # Directory for app-specific data and documentation
+│ ├── auto_docs/ # Generated documentation of app features
+│ ├── demos/ # Exploration session data
+│ │ ├── screenshots/ # UI screenshots during exploration
+│ │ ├── xmls/ # UI hierarchy XML files
+│ │ └── logs/ # Exploration and reflection logs
+├── scripts/ # Core functionality scripts
+│ ├── and_controller.py # Android device control and interaction
+│ ├── config.py # Configuration management
+│ ├── model.py # AI model integration
+│ ├── prompts.py # AI model prompts
+│ └── utils.py # Utility functions
+├── config.yaml # Configuration settings
+├── learn.py # Main script for autonomous exploration
+├── requirements.txt # Project dependencies
+└── LICENSE # MIT License
 ```
 
 ## Prerequisites
@@ -24,6 +29,7 @@ NewAgent/
 - Python 3.x
 - Android Debug Bridge (ADB)
 - Android device with USB debugging enabled or Android Studio emulator
+- API key for your chosen AI model (Gemini, OpenAI, or Qwen)
 
 ## Installation
 
@@ -56,25 +62,51 @@ MIN_DIST: 10
 
 ## Usage
 
-### Autonomous Exploration
+### Autonomous App Exploration
 
-Run the agent in autonomous exploration mode:
+Run the agent to explore an Android app:
 
 ```bash
-python learn.py --app [app_name]
+python learn.py --package "com.example.app" --app_name "Example App" --description "This is a sample app for testing"
 ```
 
-Optional arguments:
-- `--app`: Name of the target application to explore
-- `--root_dir`: Root directory for agent operation (default: current directory)
+Or run interactively:
+```bash
+python learn.py
+```
+Then follow the prompts to enter:
+- Package name (e.g., com.android.chrome)
+- App name (e.g., Chrome)
+- App description (e.g., "A web browser for Android devices")
 
-## Features
+### Features
 
-- Autonomous exploration of Android applications
-- Support for multiple AI models (Gemini, OpenAI, Qwen)
-- Android device interaction through ADB
-- Configurable exploration parameters
-- Documentation generation for explored apps
+- **Direct App Launching**: Launch apps using package names
+- **Intelligent Exploration**: Understand app purpose and explore features based on description
+- **Systematic Feature Discovery**: Automatically explore and document app features
+- **Graceful Interruption**: Stop exploration safely when interrupted
+- **Documentation Generation**: Create detailed documentation of discovered features
+- **Multiple AI Models**: Support for Gemini, OpenAI, and Qwen
+- **Configurable Parameters**: Customize exploration behavior and documentation
+
+### Exploration Process
+
+1. **App Launch**: The agent launches the target app using its package name
+2. **Feature Understanding**: Uses the provided description to understand the app's purpose
+3. **Systematic Exploration**: 
+   - Identifies and interacts with UI elements
+   - Explores different features and functionalities
+   - Documents discovered features
+4. **Safe Interruption**: Can be safely stopped at any time using Ctrl+C
+5. **Documentation**: Generates comprehensive documentation of explored features
+
+### Output
+
+The agent generates:
+- Screenshots of UI interactions
+- XML hierarchy files for UI analysis
+- Exploration and reflection logs
+- Feature documentation in the `auto_docs` directory
 
 ## Dependencies
 
