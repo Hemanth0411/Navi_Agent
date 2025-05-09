@@ -81,11 +81,12 @@ Then follow the prompts to enter:
 
 ### Features
 
-- **Direct App Launching**: Launch apps using package names
-- **Intelligent Exploration**: Understand app purpose and explore features based on description
-- **Systematic Feature Discovery**: Automatically explore and document app features
-- **Graceful Interruption**: Stop exploration safely when interrupted
-- **Documentation Generation**: Create detailed documentation of discovered features
+- **Robust Error Handling**: Comprehensive error handling and recovery mechanisms
+- **Intelligent Recovery**: Multiple recovery strategies for app crashes and stuck states
+- **Feature Validation**: Strict validation of extracted features and actions
+- **State Management**: Advanced state tracking and comparison
+- **Action Validation**: Comprehensive validation of all action types and parameters
+- **Memory Management**: Bounded exploration history to prevent memory issues
 - **Multiple AI Models**: Support for Gemini, OpenAI, and Qwen
 - **Configurable Parameters**: Customize exploration behavior and documentation
 
@@ -97,8 +98,21 @@ Then follow the prompts to enter:
    - Identifies and interacts with UI elements
    - Explores different features and functionalities
    - Documents discovered features
-4. **Safe Interruption**: Can be safely stopped at any time using Ctrl+C
-5. **Documentation**: Generates comprehensive documentation of explored features
+4. **Recovery Mechanisms**:
+   - Automatic detection of app crashes
+   - Multiple recovery strategies (back navigation, home navigation, app relaunch)
+   - Stuck state detection and recovery
+5. **Safe Interruption**: Can be safely stopped at any time using Ctrl+C
+6. **Documentation**: Generates comprehensive documentation of explored features
+
+### Recovery Strategies
+
+The agent implements multiple recovery strategies:
+1. **Back Navigation**: Attempts to go back when stuck
+2. **Home Navigation**: Returns to home screen if back navigation fails
+3. **App Relaunch**: Relaunches the app if other recovery methods fail
+4. **Alternative Navigation**: Explores unexplored areas when stuck
+5. **State Verification**: Verifies app state after recovery attempts
 
 ### Output
 
