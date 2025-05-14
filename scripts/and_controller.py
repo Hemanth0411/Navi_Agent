@@ -1,13 +1,13 @@
 import os
 import subprocess
-import shlex # For parsing command strings safely
 import xml.etree.ElementTree as ET
-from .config import load_config # Use relative import for sibling module
-from .utils import print_with_color # Use relative import for sibling module
+import shlex
+from .config import load_config
+from .utils import print_with_color
+
 
 configs = load_config()
 
-# --- Replaces the old execute_adb ---
 def _run_adb_command_base(device_id: str | None, command_args: list):
     """Internal helper to run ADB commands."""
     base_cmd = ["adb"]
@@ -33,7 +33,7 @@ def _run_adb_command_base(device_id: str | None, command_args: list):
     try:
         result = subprocess.run(full_cmd, capture_output=True, text=True, check=False) # check=False to inspect manually
         if result.returncode != 0:
-            print_with_color(f"Command failed: {" ".join(full_cmd)}", "red")
+            print_with_color(f"Command failed: {' '.join(full_cmd)}", "red")
             if result.stderr:
                 print_with_color(f"Stderr: {result.stderr.strip()}", "red")
             return "ERROR", result.stderr.strip() if result.stderr else "Unknown ADB error"
@@ -256,43 +256,45 @@ class AndroidController:
         return self._execute_command(["shell", "input", "tap", str(x), str(y)])[0]
 
     def text(self, input_str):
-        # The new adb_controller uses %s for spaces. Let's adopt that.
-        # The existing controller also did input_str.replace("'", "")
-        # This might be to avoid issues if the string itself contains single quotes
-        # when the command is built for shell=True. With shell=False and args list, it's less of an issue.
-        # However, text input via adb can be tricky with special characters.
-        # The safest way is often to use a method that doesn't involve direct shell interpretation of the text string.
-        # For `adb shell input text`, replacing spaces with %s is standard.
-        # Other special characters might still be problematic depending on the Android version and keyboard.
         escaped_str = input_str.replace(' ', '%s')
-        escaped_str = escaped_str.replace("'", "'\\''") # Escape single quotes
-        # Removed .replace("'", "") as it might be less needed with shell=False style execution
+        escaped_str = escaped_str.replace("'", "'\\''") 
         return self._execute_command(["shell", "input", "text", escaped_str])[0]
 
     def long_press(self, x, y, duration=1000):
         return self._execute_command(["shell", "input", "swipe", str(x), str(y), str(x), str(y), str(duration)])[0]
 
-    # Element-centric swipe (existing logic)
-    def swipe_element(self, x, y, direction, dist="medium", quick=False):
-        if self.height == 0: # Ensure screen dimensions are available
+    def swipe_element(self, x, y, direction, distance_str="medium"):
+        if self.height == 0: 
             print_with_color("Screen height is 0, cannot perform element swipe. Check device connection.","red")
             return "ERROR"
-        unit_dist = self.height // 10
-        if dist == "medium":
-            unit_dist *= 2
-        elif dist == "long":
-            unit_dist *= 5
         
+        unit_dist_base = self.height // 20 # Base unit distance (e.g., 5% of screen height)
+        
+        distance_str_lower = distance_str.lower()
+        if distance_str_lower == "short":
+            unit_dist = unit_dist_base # e.g., 5%
+            duration = 200 
+        elif distance_str_lower == "medium":
+            unit_dist = unit_dist_base * 2 # e.g., 10%
+            duration = 400
+        elif distance_str_lower == "long":
+            unit_dist = unit_dist_base * 4 # e.g., 20%
+            duration = 800
+        else:
+            print_with_color(f"Invalid swipe_element distance: {distance_str}, defaulting to medium", "yellow")
+            unit_dist = unit_dist_base * 2 
+            duration = 400
+            
         offset_x, offset_y = 0, 0
-        if direction.lower() == "up": offset_y = -unit_dist
-        elif direction.lower() == "down": offset_y = unit_dist
-        elif direction.lower() == "left": offset_x = -unit_dist
-        elif direction.lower() == "right": offset_x = unit_dist
+        direction_lower = direction.lower()
+        if direction_lower == "up": offset_y = -unit_dist
+        elif direction_lower == "down": offset_y = unit_dist
+        elif direction_lower == "left": offset_x = -unit_dist
+        elif direction_lower == "right": offset_x = unit_dist
         else:
             print_with_color(f"Invalid swipe direction: {direction}", "red")
             return "ERROR"
             
-        duration = 100 if quick else 400
         end_x, end_y = x + offset_x, y + offset_y
         # Ensure swipe coordinates are within bounds
         end_x = max(0, min(self.width - 1, end_x))
@@ -353,7 +355,7 @@ class AndroidController:
     def press_keyevent(self, keycode):
         return self._execute_command(["shell", "input", "keyevent", str(keycode)])[0]
 
-    def back(self): # Overwrites old back to use press_keyevent
+    def back(self): 
         return self.press_keyevent(4)
 
     def press_home(self):
@@ -363,7 +365,7 @@ class AndroidController:
         return self.press_keyevent(66)
 
     def press_delete(self):
-        return self.press_keyevent(67) # Backspace/Delete
+        return self.press_keyevent(67) 
 
     def press_tab(self):
         return self.press_keyevent(61)
@@ -378,10 +380,10 @@ class AndroidController:
         return self.press_keyevent(25)
 
     def press_mute(self):
-        return self.press_keyevent(164) # MUTE keycode
+        return self.press_keyevent(164) 
         
-    def press_app_switch(self):
-        return self.press_keyevent(187) # App switch / Recents
+    def press_app_switch(self): # Already Exists
+        return self.press_keyevent(187) 
 
     def press_media_play_pause(self):
         return self.press_keyevent(85)
@@ -392,12 +394,9 @@ class AndroidController:
     def press_media_previous(self): 
         return self.press_keyevent(88)
 
-    # --- Other Control Methods ---
     def open_notifications(self):
         return self._execute_command(["shell", "cmd", "statusbar", "expand-notifications"])[0]
 
-# Keep the old swipe method name for compatibility with self_explorer.py for now.
-# It was: swipe(self, x, y, direction, dist="medium", quick=False)
-# Renaming it to swipe_element to avoid confusion with swipe_precise and swipe_screen_direction.
-# The self_explorer.py script will need to be updated to call swipe_element.
-# Or, we can make the VLM call swipe_element explicitly. 
+    def close_notifications(self):
+        return self._execute_command(["shell", "cmd", "statusbar", "collapse"])[0]
+    

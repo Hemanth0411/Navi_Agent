@@ -1,0 +1,374 @@
+Round 1 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: None
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The current UI is the YouTube home screen.  There is a search bar labeled "Search YouTube" (element 7).  A prompt suggests searching to get started (element 14).
+
+Thought: The task is to search for "Telugu movie".  The search bar (element 7) is the appropriate element to use for this task.
+
+Action: tap(7)
+Summary: tapped on the search bar
+
+
+-----------------------------
+Round 2 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: tapped on the search bar
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The current UI is the YouTube home screen. The search bar (element 6) is highlighted, indicating it's ready for text input.  There's a placeholder text "Search YouTube".
+
+Thought: The task is to search for "Telugu movie". Since the search bar is already selected, I'll directly type the search query into it.
+
+Action: type_text('Telugu movie')
+
+Summary: entered 'Telugu movie' into the search bar
+
+-----------------------------
+Round 3 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: entered 'Telugu movie' into the search bar
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The YouTube app is open.  The search bar (element 6) shows "Telugu movie" which was entered in the previous action.  There is a large message "Try searching to get started" (element 13), suggesting that results are not yet displayed.  The bottom navigation bar shows options for Home, Shorts, Subscriptions and You.
+
+Thought: The search query "Telugu movie" has been entered but no results are displayed.  The UI suggests that pressing Enter or the search button might be necessary to initiate the search.  There is no visible "search" button, so I will try pressing the Enter key on the keyboard.
+
+Action: press_enter()
+Summary: pressed Enter to initiate the search.
+-----------------------------
+Round 4 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: Error in parsing VLM response.
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The current screen is the YouTube home screen.  Element 6 is a search bar labeled "Search YouTube".  Element 13 is a prompt suggesting searching to get started. There is no visible result from the previous erroneous action.
+
+Thought: The task is to search for Telugu movies. The YouTube search bar (element 6) is the appropriate place to input the search query.  I will tap on the search bar to focus it, and then type the search query.
+
+Action: tap(6)
+Summary: tapped on the search bar.
+-----------------------------
+Round 5 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: tapped on the search bar.
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The current UI shows a permission request from YouTube to allow it to record audio. There are three options: "While using the app", "Only this time", and "Don't allow".  The search bar is not visible.
+
+Thought: The last action was tapping the search bar, which triggered the permission request. To proceed with the task, I need to grant YouTube permission to record audio. After that, I can search for Telugu movies. I will choose the "While using the app" option to grant the permission permanently.
+
+Action: tap(5)
+
+Summary: Granted YouTube permission to record audio.
+
+-----------------------------
+Round 6 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: Granted YouTube permission to record audio.
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The current UI is a Google Assistant screen showing a message "Didn't hear that. Try again."  There is a microphone icon (element 7) labeled "Tap microphone to try again".  The top shows a "Voice" and "Song" option. The close button (element 5) is also visible.
+
+Thought: The last action granted permission, and the current screen indicates that the voice recognition failed. The task is to search for Telugu movies. Since voice search failed, I need to switch to a different app like YouTube or Google Search to accomplish this. To do this, I will first close the current screen using the close button and then use the app switcher to navigate to YouTube or Google Search.
+
+Action: tap(5)
+
+Summary: Closed the Google Assistant screen.
+
+-----------------------------
+Round 7 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: Closed the Google Assistant screen.
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The current UI shows the YouTube search bar.  The search bar is empty and ready for input. There are navigation buttons below: a menu button, a smiley face button, a search button (magnifying glass), a back button, and a microphone button.
+
+Thought: The task is to search for Telugu movies. The YouTube search bar is visible and ready to accept input.  Therefore, I should type "Telugu movies" into the search bar.
+
+Action: type_text('Telugu movies')
+
+Summary: Entered "Telugu movies" into the YouTube search bar.
+
+-----------------------------
+Round 8 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: Entered "Telugu movies" into the YouTube search bar.
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The UI shows YouTube search results for "Telugu movies".  The search bar (element 7) contains the search query. Several search result options related to Telugu movies are displayed below.
+
+Thought: The task is to search for Telugu movies.  The last action successfully entered the search term into the YouTube search bar. The current screen displays relevant search results.  To complete the task, I need to select one of the results. I'll select the first result ("telugu movies") as it is the most general.
+
+Action: tap(20)
+
+Summary: tapped on the first search result.
+
+-----------------------------
+Round 9 Explore Phase:
+Prompt: You are an agent controlling an Android device to complete a task. You are given the current UI screenshot with elements labeled with numbers, the overall task description, and a summary of your last action. First, provide your observation of the current UI and your thought process to decide the next action. Then, choose one of the following actions:
+
+Hints:
+- If the target application or UI elements needed for the task are not visible on the current screen (e.g., you are on the home screen and need a specific app), consider actions like `swipe_screen('up', 'medium')` or `swipe_screen('down', 'medium')` to find an app drawer or scroll for more options. Then, observe the new screen to locate the target.
+- When you need to add a new item (like a task, list item, alarm, contact, event, etc.), look for a UI element that visually resembles a plus sign (`+`), or has text like "Add", "New", or "Create". This is commonly used for creation actions.
+- When you need to change or edit existing text or numbers in a field: first, ensure the field is focused (you might need to `tap` it). Then, to clear or modify it, try to position the cursor at the end of the existing content (this might happen automatically on focus, or you might need to tap at the end of the text if possible). After that, use `press_delete()` repeatedly to remove the unwanted characters before typing new content with `type_text('new_value')`.
+- To close an application completely: first, perform `press_app_switch()` to show recent apps. Then, on the recent apps screen, observe the layout. You might need to `swipe_element(element_representing_the_app_to_close, 'up', 'medium')` to close a specific app. Alternatively, look for a "Clear all" or similar button, which might require swiping through the recent apps list (e.g., using `swipe_screen('left', 'short')` or `swipe_screen('right', 'short')` repeatedly) to find it, then `tap` it.
+- To open notifications: you can use the `open_notifications()` function directly. Alternatively, if that function seems ineffective or you prefer a gesture, you can try `swipe_screen('down', 'short')` starting from the very top of the screen (though `swipe_screen` usually swipes from center; this gesture might need a more precise swipe if the function fails).
+
+Available Functions:
+1.  tap(element: int): Tap a UI element with the given number.
+2.  type_text(text_input: str): Input text into a focused text field. Make sure to tap on the text field first to focus it if needed, then use this action.
+3.  long_press(element: int): Long press a UI element with the given number.
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a UI element with the given number. `direction` can be one of [`up`, `down`, `left`, `right`]. `distance` can be one of [`short`, `medium`, `long`].
+5.  swipe_screen(direction: str, distance: str): Swipe the screen in a general direction. `direction` can be [`up`, `down`, `left`, `right`]. `distance` can be [`short`, `medium`, `long`] (controls swipe length relative to screen size, e.g., 0.25, 0.5, 0.75 of screen dimension).
+6.  press_back(): Press the Android Back button.
+7.  press_home(): Press the Android Home button.
+8.  press_enter(): Press the Android Enter/Go button (often on a virtual keyboard).
+9.  press_delete(): Press the Android Delete/Backspace button.
+10. open_notifications(): Open the notification shade using a system command.
+11. press_app_switch(): Show the recent apps screen.
+12. FINISH: If you believe the task is completed.
+
+Your current task is: search for Telugu movie
+Summary of your last action: tapped on the first search result.
+
+Output your response in the following format:
+Observation: <Your observation of the current UI screen, focusing on elements relevant to the task.>
+Thought: <Your thought process to decide the next action. Explain why you are choosing this action based on the observation and the task goal.>
+Action: <Your chosen action, e.g., tap(3) or type_text('hello') or press_app_switch() or FINISH>
+Summary: <A concise summary of what you just did, e.g., "tapped on the login button", "entered 'hello' into the search bar", "opened app switcher". Do NOT include the numeric tag of the element in your summary.>
+
+Response: Observation: The UI shows a Google search results page for "telugu movies".  The search bar is at the top, and several search results are listed below it.  I have just tapped on a search result.  The assumption is that tapping a result leads to a new page with movie details.
+
+Thought: The task is to search for Telugu movies.  I have already performed the search and tapped a result.  The next step is to determine if this result provides what I need (information about Telugu movies).  If this result is not satisfactory, I will go back to the search results and try another one.  If I have exhausted all reasonable results, the task is complete.  Given the image shows a search result, I will assume it's what I'm looking for and finish.
+
+Action: FINISH
+
+Summary: Finished searching for Telugu movies after viewing a search result.
+
+-----------------------------

@@ -1,0 +1,109 @@
+# Ignore Android Studio specific files
+.idea/
+*.iml
+
+# Ignore build output directories
+/build/
+*/build/
+
+# Ignore Gradle files
+.gradle/
+*.jar
+*.war
+*.ear
+
+# Ignore local configuration files
+local.properties
+
+# Ignore generated files
+*.apk
+*.ap_
+*.dex
+*.class
+*.so
+*.log
+*.keystore
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore miscellaneous
+*.swp
+*.tmp
+*.temp
+*.orig
+
+# Ignore Python cache and screenshots folders
+__pycache__/
+screenshots/
+
+# Ignore IntelliJ IDEA specific files
+*.ipr
+*.iws
+
+# Ignore Maven specific files
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Ignore Node.js specific files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore logs
+*.log
+
+# Ignore coverage reports
+coverage/
+*.lcov
+
+# Ignore temporary files
+*.bak
+*.old
+*.backup
+
+# Ignore JetBrains IDEs
+*.idea/
+*.ijwb/
+
+# Ignore macOS specific files
+.AppleDouble
+.LSOverride
+
+# Ignore Windows specific files
+desktop.ini
+$RECYCLE.BIN/
+
+# Ignore Linux specific files
+*~
+
+# Python specific ignores
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.venv
+env/
+venv/
+ENV/
+VENV/
+*.egg
+*.egg-info/
+dist/
+build/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.pytype/
+.ipynb_checkpoints/

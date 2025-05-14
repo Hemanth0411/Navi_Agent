@@ -1,0 +1,4 @@
+Opens the Android Settings application.
+---
+Refined (2025-05-14 18:25:35):
+Opens the device's main settings menu.

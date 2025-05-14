@@ -1,0 +1,4 @@
+Activates the Google search bar, allowing the user to input a search query.
+---
+Refined (2025-05-14 16:28:00):
+Activates the Google search bar, displaying a search input field and recent searches.

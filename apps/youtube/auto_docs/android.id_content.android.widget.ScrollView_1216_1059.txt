@@ -1,0 +1,1 @@
+UI element 5 ("While using the app"): Grants the app permission to access the device's microphone for the duration of the app's use.

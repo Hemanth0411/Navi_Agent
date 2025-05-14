@@ -196,15 +196,20 @@ def parse_explore_rsp(rsp):
         last_act = summary_text
 
         # Handle simple actions first (no parentheses or parameters)
-        act_upper = act_text.upper()
-        if act_upper == "FINISH": return ["FINISH"]
-        if act_upper == "PRESS_BACK": return ["press_back", last_act]
-        if act_upper == "PRESS_HOME": return ["press_home", last_act]
-        if act_upper == "PRESS_ENTER": return ["press_enter", last_act]
-        if act_upper == "PRESS_DELETE": return ["press_delete", last_act]
-        if act_upper == "OPEN_NOTIFICATIONS": return ["open_notifications", last_act]
-        # GRID action was mentioned in previous thoughts for parse_explore_rsp, ensure it's handled if needed
-        if act_upper == "GRID": return ["grid"] # Assuming GRID takes no params, as per previous logic
+        simple_action_match = re.match(r"(\w+)\s*(?:\(\s*\))?$", act_text) # Matches "ACTION" or "ACTION()"
+        
+        parsed_simple_action_name = ""
+        if simple_action_match:
+            parsed_simple_action_name = simple_action_match.group(1).upper()
+
+        if parsed_simple_action_name == "FINISH": return ["FINISH"]
+        if parsed_simple_action_name == "PRESS_BACK": return ["press_back", last_act]
+        if parsed_simple_action_name == "PRESS_HOME": return ["press_home", last_act]
+        if parsed_simple_action_name == "PRESS_ENTER": return ["press_enter", last_act]
+        if parsed_simple_action_name == "PRESS_DELETE": return ["press_delete", last_act]
+        if parsed_simple_action_name == "OPEN_NOTIFICATIONS": return ["open_notifications", last_act]
+        if parsed_simple_action_name == "PRESS_APP_SWITCH": return ["press_app_switch", last_act]
+        if parsed_simple_action_name == "GRID": return ["grid"] 
 
         # Parse actions with parameters: func_name(params)
         match = re.match(r"(\w+)\s*\((.*)\)", act_text)
@@ -219,7 +224,7 @@ def parse_explore_rsp(rsp):
             try: area = int(params_str); return [act_name, area, last_act]
             except ValueError: print_with_color(f"Invalid parameter for tap: {params_str}", "red"); return ["ERROR"]
         
-        elif act_name == "type_text": # Changed from "text" to "type_text"
+        elif act_name == "type_global": # Changed from "type_text" to "type_global"
             input_str = params_str.strip("'\"") 
             return [act_name, input_str, last_act]
         
@@ -227,13 +232,13 @@ def parse_explore_rsp(rsp):
             try: area = int(params_str); return [act_name, area, last_act]
             except ValueError: print_with_color(f"Invalid parameter for long_press: {params_str}", "red"); return ["ERROR"]
         
-        elif act_name == "swipe_element": # Changed from "swipe"
+        elif act_name == "swipe_element": 
             try:
                 parts = [p.strip(" '\"") for p in params_str.split(",")]
-                if len(parts) == 3:
+                if len(parts) == 3: # element_id (area), direction, distance
                     area = int(parts[0])
                     direction = parts[1].lower()
-                    distance = parts[2].lower() # VLM uses 'short', 'medium', 'long'
+                    distance = parts[2].lower() 
                     return [act_name, area, direction, distance, last_act]
                 else: print_with_color(f"Invalid parameters for swipe_element: {params_str}", "red"); return ["ERROR"]
             except ValueError: print_with_color(f"Error parsing swipe_element parameters: {params_str}", "red"); return ["ERROR"]
@@ -241,9 +246,9 @@ def parse_explore_rsp(rsp):
         elif act_name == "swipe_screen":
             try:
                 parts = [p.strip(" '\"") for p in params_str.split(",")]
-                if len(parts) == 2:
+                if len(parts) == 2: # direction, distance
                     direction = parts[0].lower()
-                    distance = parts[1].lower() # VLM uses 'short', 'medium', 'long'
+                    distance = parts[1].lower() 
                     return [act_name, direction, distance, last_act]
                 else: print_with_color(f"Invalid parameters for swipe_screen: {params_str}", "red"); return ["ERROR"]
             except ValueError: print_with_color(f"Error parsing swipe_screen parameters: {params_str}", "red"); return ["ERROR"]
@@ -271,9 +276,7 @@ def parse_reflect_rsp(rsp):
         thought_match = re.search(r"Thought:\s*(.*?)(?:\nDocumentation:|$)", rsp, re.DOTALL | re.MULTILINE)
         if thought_match:
             thought_text = thought_match.group(1).strip()
-        elif decision_text != "ERROR: Decision not found": # If decision was found, thought should ideally follow
-            # This part is tricky; if Thought is missing but Decision exists, we might have a format issue
-            # For now, we proceed, error will be caught if Thought is essential and missing.
+        elif decision_text != "ERROR: Decision not found": 
             pass 
 
         # Attempt to find Documentation (it's often the last part)
@@ -281,10 +284,7 @@ def parse_reflect_rsp(rsp):
         if doc_match:
             doc_text = doc_match.group(1).strip()
         
-        # Check if essential parts were found
         if decision_text.startswith("ERROR:") or thought_text.startswith("ERROR:"):
-            # If only documentation was missing, it might be acceptable (doc_text defaults to N/A)
-            # But missing decision or thought is a problem.
             error_details = f"Parsed Decision: '{decision_text}', Parsed Thought: '{thought_text}', Parsed Doc: '{doc_text}'"
             print_with_color(f"Failed to parse essential parts of VLM reflection. Details: {error_details}. RSP: {rsp}", "red")
             return ["ERROR"]
@@ -294,7 +294,6 @@ def parse_reflect_rsp(rsp):
         print_with_color(f"Documentation: {doc_text}", "green")
         
         decision_upper = decision_text.upper()
-        # Ensure that returned decision is one of the expected enum values
         valid_decisions = ["BACK", "CONTINUE", "SUCCESS", "INEFFECTIVE"]
         if decision_upper in valid_decisions:
             return [decision_upper, thought_text, doc_text]
@@ -304,4 +303,4 @@ def parse_reflect_rsp(rsp):
             
     except Exception as e:
         print_with_color(f"Critical error in parse_reflect_rsp: {e}, RSP: {rsp}", "red")
-        return ["ERROR"] 
+        return ["ERROR"]

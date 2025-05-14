@@ -1,0 +1,1 @@
+N/A (While element 34 was tapped, its function is inherent to the search result list. Specifying its function separately isn't helpful in this context.)

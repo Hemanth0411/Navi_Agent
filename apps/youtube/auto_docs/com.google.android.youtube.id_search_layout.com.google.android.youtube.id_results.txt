@@ -1,0 +1,1 @@
+Element 19 (UID: com.google.android.youtube.id_search_layout.com.google.android.youtube.id_results): This element represents a list of search suggestions in the YouTube search bar. Tapping on a suggestion initiates a YouTube search using the selected suggestion as the query.
