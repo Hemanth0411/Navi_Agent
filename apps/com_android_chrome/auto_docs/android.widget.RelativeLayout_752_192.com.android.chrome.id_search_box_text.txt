@@ -1,0 +1,4 @@
+Activates the search bar, allowing the user to input a search query or URL.
+---
+Refined (2025-05-16 12:41:16):
+Activates the search bar, allowing text input for a search query or URL.

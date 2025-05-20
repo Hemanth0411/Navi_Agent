@@ -1,0 +1,4 @@
+Selects the hour for the alarm. Tapping a number on the dial changes the hour displayed.
+---
+Refined (2025-05-16 13:36:00):
+Changes the hour selection on the alarm clock.

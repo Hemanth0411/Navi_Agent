@@ -1,0 +1,4 @@
+UI element 6: Initiate a search query, either by text input or voice recognition.
+---
+Refined (2025-05-14 16:53:20):
+Activates voice search functionality.

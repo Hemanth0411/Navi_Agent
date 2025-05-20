@@ -1,0 +1,19 @@
+Sets the minutes in the time picker.
+---
+Refined (2025-05-16 13:02:14):
+Selects the minutes for the alarm.  Tapping a number on the circular time picker sets the alarm minutes to that value.
+---
+Refined (2025-05-16 13:05:02):
+Selects the specified number of minutes for the alarm.
+---
+Refined (2025-05-16 13:05:58):
+Selects the minutes for the alarm time.  Tapping a number on the circular picker updates the digital display accordingly.
+---
+Refined (2025-05-16 13:21:10):
+Sets the minutes for the alarm.
+---
+Refined (2025-05-16 13:25:40):
+The element `com.google.android.deskclock.id_material_timepicker_view.com.google.android.deskclock.id_material_clock_face` is a circular dial for selecting minutes in the clock app's alarm setting interface. Tapping a number on this dial sets the minutes to the selected value.
+---
+Refined (2025-05-16 13:27:12):
+This UI element (Element 23) represents the minute selection dial in the alarm setting interface.  Tapping a number on this dial sets the alarm's minute to that value.

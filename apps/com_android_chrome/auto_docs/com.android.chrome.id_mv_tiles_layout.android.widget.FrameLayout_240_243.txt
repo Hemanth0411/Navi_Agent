@@ -1,0 +1,1 @@
+Opens the top search suggestion result in the Google Search results.

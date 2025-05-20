@@ -1,0 +1,31 @@
+Sets the minutes for the alarm.
+---
+Refined (2025-05-16 13:03:16):
+Sets the minutes for the alarm using a circular time picker.  Tapping a number on the picker sets the alarm to that minute.
+---
+Refined (2025-05-16 13:10:43):
+Selects the specified minute value for the alarm.
+---
+Refined (2025-05-16 13:19:31):
+Sets the minutes for the alarm time.  Tapping a number on this dial changes the currently selected minute value.
+---
+Refined (2025-05-16 13:22:14):
+Selecting a value on this dial sets the minutes for the alarm.
+---
+Refined (2025-05-16 13:24:44):
+This UI element (Element 14) represents a selectable minute value in the alarm setting process. Tapping this element changes the selected minutes to the value displayed on the element.
+---
+Refined (2025-05-16 13:31:40):
+Selects the minutes for the alarm.
+---
+Refined (2025-05-16 13:32:18):
+Selects the number of minutes for the alarm.
+---
+Refined (2025-05-16 13:32:59):
+Selects the minutes for the alarm time.
+---
+Refined (2025-05-16 13:35:41):
+Sets the minutes for the alarm.  Tapping a number on the dial selects that number of minutes past the hour.
+---
+Refined (2025-05-16 13:36:57):
+Tapping a number on the minute dial changes the minutes setting for the alarm.

@@ -1,0 +1,1 @@
+Selects the specified number of minutes for the alarm.

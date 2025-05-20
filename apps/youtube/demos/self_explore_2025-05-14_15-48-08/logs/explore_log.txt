@@ -1,0 +1,264 @@
+Round 1 Explore Phase:
+Prompt: You are an intelligent agent controlling a smartphone to complete a specific task.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags (center of the element).
+2. Documentation for some UI elements on this screen, if available from past interactions:
+   No documentation available for elements on this screen.
+3. The overall task to complete: search for telugu movie
+4. A summary of your previous action: None
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- App/Element Not Visible: If the target app or UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")` to scroll or find an app drawer.
+- Adding New Items: Look for UI elements like a plus sign (`+`) or text like "Add", "New", "Create". Use `tap(element_number)` on it.
+- Editing Text Fields:
+    1. `tap(element_number_of_field)` to focus the field.
+    2. Use `press_delete()` repeatedly to clear existing unwanted text.
+    3. Use `type_global("your new text")` to input the desired text.
+- Closing an App:
+    1. `press_app_switch()` to show recent apps.
+    2. On the recent apps screen, identify the app's card (it will be labeled with a number).
+    3. Use `swipe_element(element_number_of_app_card, "up", "medium")` to close it. Or, look for a "Clear all" button and `tap` it.
+- Opening Notifications: Use `open_notifications()`. If it fails, you can try `swipe_screen("down", "short")` as a general gesture (though it swipes from screen center by default).
+- General Navigation: Use `press_back()` to go to the previous screen. Use `press_home()` to go to the home screen.
+
+Available Functions:
+1.  tap(element: int): Tap the UI element with the given numeric tag.
+    Example: tap(5)
+2.  type_global(text_to_input: str): Type text into the currently focused input field. Ensure field is focused first (e.g., via tap).
+    Example: type_global("Hello world")
+3.  long_press(element: int): Long press the UI element with the given numeric tag.
+    Example: long_press(3)
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a specific labeled UI element (e.g., a scrollable list).
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"].
+    Example: swipe_element(2, "up", "medium")
+5.  swipe_screen(direction: str, distance: str): Swipe the entire screen generally. Useful for scrolling pages or app drawers.
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"] (e.g., short ~25% of screen, medium ~50%, long ~75%).
+    Example: swipe_screen("down", "long")
+6.  press_back(): Press the Android system Back button.
+7.  press_home(): Press the Android system Home button.
+8.  press_enter(): Press the Enter/Go key (usually on a virtual keyboard).
+9.  press_delete(): Press the Delete/Backspace key.
+10. open_notifications(): Attempt to open the notification shade.
+11. press_app_switch(): Show the recent apps overview.
+12. grid(): If the target UI element is not labeled or labels are unhelpful, call this to switch to a grid-based interaction mode for the next step.
+13. FINISH: Call this if you believe the task search for telugu movie is fully completed.
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal? Which function is most appropriate and why? Which element (if any) is the target? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response: Observation: The screenshot shows the home screen of an Android smartphone.  Several app icons are visible, including Play Store (16), Gmail (17), Photos (18), YouTube (19), Phone (20), Messages (21), Chrome (22), and Google (24).  There is also a search bar (23) at the bottom of the screen, along with microphone and camera icons (25, 26).  The task is to search for Telugu movies.  The search bar is the most relevant UI element for this task.
+
+Thought: The most direct way to accomplish the task is to use the search bar at the bottom of the screen. First, I need to tap on the search bar to activate it. Then, I'll type the search query "Telugu movies".
+
+Action: tap(23)
+
+Summary: Tapped the search bar.
+
+-----------------------------
+Round 2 Explore Phase:
+Prompt: You are an intelligent agent controlling a smartphone to complete a specific task.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags (center of the element).
+2. Documentation for some UI elements on this screen, if available from past interactions:
+   No documentation available for elements on this screen.
+3. The overall task to complete: search for telugu movie
+4. A summary of your previous action: Tapped the search bar.
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- App/Element Not Visible: If the target app or UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")` to scroll or find an app drawer.
+- Adding New Items: Look for UI elements like a plus sign (`+`) or text like "Add", "New", "Create". Use `tap(element_number)` on it.
+- Editing Text Fields:
+    1. `tap(element_number_of_field)` to focus the field.
+    2. Use `press_delete()` repeatedly to clear existing unwanted text.
+    3. Use `type_global("your new text")` to input the desired text.
+- Closing an App:
+    1. `press_app_switch()` to show recent apps.
+    2. On the recent apps screen, identify the app's card (it will be labeled with a number).
+    3. Use `swipe_element(element_number_of_app_card, "up", "medium")` to close it. Or, look for a "Clear all" button and `tap` it.
+- Opening Notifications: Use `open_notifications()`. If it fails, you can try `swipe_screen("down", "short")` as a general gesture (though it swipes from screen center by default).
+- General Navigation: Use `press_back()` to go to the previous screen. Use `press_home()` to go to the home screen.
+
+Available Functions:
+1.  tap(element: int): Tap the UI element with the given numeric tag.
+    Example: tap(5)
+2.  type_global(text_to_input: str): Type text into the currently focused input field. Ensure field is focused first (e.g., via tap).
+    Example: type_global("Hello world")
+3.  long_press(element: int): Long press the UI element with the given numeric tag.
+    Example: long_press(3)
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a specific labeled UI element (e.g., a scrollable list).
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"].
+    Example: swipe_element(2, "up", "medium")
+5.  swipe_screen(direction: str, distance: str): Swipe the entire screen generally. Useful for scrolling pages or app drawers.
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"] (e.g., short ~25% of screen, medium ~50%, long ~75%).
+    Example: swipe_screen("down", "long")
+6.  press_back(): Press the Android system Back button.
+7.  press_home(): Press the Android system Home button.
+8.  press_enter(): Press the Enter/Go key (usually on a virtual keyboard).
+9.  press_delete(): Press the Delete/Backspace key.
+10. open_notifications(): Attempt to open the notification shade.
+11. press_app_switch(): Show the recent apps overview.
+12. grid(): If the target UI element is not labeled or labels are unhelpful, call this to switch to a grid-based interaction mode for the next step.
+13. FINISH: Call this if you believe the task search for telugu movie is fully completed.
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal? Which function is most appropriate and why? Which element (if any) is the target? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response: Observation: The screenshot shows a Google search results page.  The search bar is at the top, and a list of search results is displayed below. The task is to search for "telugu movie".  The previous action was tapping the search bar, so it should currently be focused and ready for text input.
+
+Thought: The immediate sub-goal is to type "telugu movie" into the focused search bar.  The most appropriate function is `type_global()` because it allows typing text into the active input field.  No specific element number is needed because the search bar is already focused.
+
+Action: type_global("telugu movie")
+
+Summary: Typed "telugu movie" into the search bar.
+
+-----------------------------
+Round 3 Explore Phase:
+Prompt: You are an intelligent agent controlling a smartphone to complete a specific task.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags (center of the element).
+2. Documentation for some UI elements on this screen, if available from past interactions:
+   No documentation available for elements on this screen.
+3. The overall task to complete: search for telugu movie
+4. A summary of your previous action: Typed "telugu movie" into the search bar.
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- App/Element Not Visible: If the target app or UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")` to scroll or find an app drawer.
+- Adding New Items: Look for UI elements like a plus sign (`+`) or text like "Add", "New", "Create". Use `tap(element_number)` on it.
+- Editing Text Fields:
+    1. `tap(element_number_of_field)` to focus the field.
+    2. Use `press_delete()` repeatedly to clear existing unwanted text.
+    3. Use `type_global("your new text")` to input the desired text.
+- Closing an App:
+    1. `press_app_switch()` to show recent apps.
+    2. On the recent apps screen, identify the app's card (it will be labeled with a number).
+    3. Use `swipe_element(element_number_of_app_card, "up", "medium")` to close it. Or, look for a "Clear all" button and `tap` it.
+- Opening Notifications: Use `open_notifications()`. If it fails, you can try `swipe_screen("down", "short")` as a general gesture (though it swipes from screen center by default).
+- General Navigation: Use `press_back()` to go to the previous screen. Use `press_home()` to go to the home screen.
+
+Available Functions:
+1.  tap(element: int): Tap the UI element with the given numeric tag.
+    Example: tap(5)
+2.  type_global(text_to_input: str): Type text into the currently focused input field. Ensure field is focused first (e.g., via tap).
+    Example: type_global("Hello world")
+3.  long_press(element: int): Long press the UI element with the given numeric tag.
+    Example: long_press(3)
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a specific labeled UI element (e.g., a scrollable list).
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"].
+    Example: swipe_element(2, "up", "medium")
+5.  swipe_screen(direction: str, distance: str): Swipe the entire screen generally. Useful for scrolling pages or app drawers.
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"] (e.g., short ~25% of screen, medium ~50%, long ~75%).
+    Example: swipe_screen("down", "long")
+6.  press_back(): Press the Android system Back button.
+7.  press_home(): Press the Android system Home button.
+8.  press_enter(): Press the Enter/Go key (usually on a virtual keyboard).
+9.  press_delete(): Press the Delete/Backspace key.
+10. open_notifications(): Attempt to open the notification shade.
+11. press_app_switch(): Show the recent apps overview.
+12. grid(): If the target UI element is not labeled or labels are unhelpful, call this to switch to a grid-based interaction mode for the next step.
+13. FINISH: Call this if you believe the task search for telugu movie is fully completed.
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal? Which function is most appropriate and why? Which element (if any) is the target? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response: Observation: The screenshot shows a Google search results page displaying various search results related to "telugu movie".  The search query "telugu movie" is visible at the top.  Numbered UI elements correspond to individual search results. The task is to search for telugu movies, and the search query has already been entered.
+
+Thought: The immediate sub-goal is to select one of the search results to view more details.  Since the search query has already been entered, selecting one of the listed results is the next logical step.  There are many options, so it's arbitrary which one to choose. I will select the first result ("telugu movies near me").  The appropriate function is `tap()`, targeting element 34.
+
+Action: tap(34)
+
+Summary: Tapped the first search result, "telugu movies near me".
+
+-----------------------------
+Round 4 Explore Phase:
+Prompt: You are an intelligent agent controlling a smartphone to complete a specific task.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags (center of the element).
+2. Documentation for some UI elements on this screen, if available from past interactions:
+   No documentation available for elements on this screen.
+3. The overall task to complete: search for telugu movie
+4. A summary of your previous action: Tapped the first search result, "telugu movies near me".
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- App/Element Not Visible: If the target app or UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")` to scroll or find an app drawer.
+- Adding New Items: Look for UI elements like a plus sign (`+`) or text like "Add", "New", "Create". Use `tap(element_number)` on it.
+- Editing Text Fields:
+    1. `tap(element_number_of_field)` to focus the field.
+    2. Use `press_delete()` repeatedly to clear existing unwanted text.
+    3. Use `type_global("your new text")` to input the desired text.
+- Closing an App:
+    1. `press_app_switch()` to show recent apps.
+    2. On the recent apps screen, identify the app's card (it will be labeled with a number).
+    3. Use `swipe_element(element_number_of_app_card, "up", "medium")` to close it. Or, look for a "Clear all" button and `tap` it.
+- Opening Notifications: Use `open_notifications()`. If it fails, you can try `swipe_screen("down", "short")` as a general gesture (though it swipes from screen center by default).
+- General Navigation: Use `press_back()` to go to the previous screen. Use `press_home()` to go to the home screen.
+
+Available Functions:
+1.  tap(element: int): Tap the UI element with the given numeric tag.
+    Example: tap(5)
+2.  type_global(text_to_input: str): Type text into the currently focused input field. Ensure field is focused first (e.g., via tap).
+    Example: type_global("Hello world")
+3.  long_press(element: int): Long press the UI element with the given numeric tag.
+    Example: long_press(3)
+4.  swipe_element(element: int, direction: str, distance: str): Swipe on a specific labeled UI element (e.g., a scrollable list).
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"].
+    Example: swipe_element(2, "up", "medium")
+5.  swipe_screen(direction: str, distance: str): Swipe the entire screen generally. Useful for scrolling pages or app drawers.
+    `direction` must be one of ["up", "down", "left", "right"].
+    `distance` must be one of ["short", "medium", "long"] (e.g., short ~25% of screen, medium ~50%, long ~75%).
+    Example: swipe_screen("down", "long")
+6.  press_back(): Press the Android system Back button.
+7.  press_home(): Press the Android system Home button.
+8.  press_enter(): Press the Enter/Go key (usually on a virtual keyboard).
+9.  press_delete(): Press the Delete/Backspace key.
+10. open_notifications(): Attempt to open the notification shade.
+11. press_app_switch(): Show the recent apps overview.
+12. grid(): If the target UI element is not labeled or labels are unhelpful, call this to switch to a grid-based interaction mode for the next step.
+13. FINISH: Call this if you believe the task search for telugu movie is fully completed.
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal? Which function is most appropriate and why? Which element (if any) is the target? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response: Observation: The screenshot shows a Google search results page displaying various search results for "telugu movies near me". The previous action was to tap the first result.  The screen currently shows a list of search refinements related to location and time (today, regal, amc, this weekend, etc.)  There's a "Search Google" option at the bottom. The task is to search for telugu movies.
+
+Thought: The previous action, tapping the first result, led to a list of refined searches.  Since the goal is a general search for Telugu movies, not a location-specific one,  we need to go back to the main search bar and perform a new search. The back button is available at the bottom.
+
+Action: press_back()
+
+Summary: Pressed the back button to return to the main search screen.
+
+-----------------------------

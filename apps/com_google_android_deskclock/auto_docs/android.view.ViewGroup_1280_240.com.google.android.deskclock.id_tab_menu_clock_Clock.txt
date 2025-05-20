@@ -1,0 +1,4 @@
+Opens the main Clock screen of the Clock application.
+---
+Refined (2025-05-16 13:18:02):
+Navigates to the clock screen.

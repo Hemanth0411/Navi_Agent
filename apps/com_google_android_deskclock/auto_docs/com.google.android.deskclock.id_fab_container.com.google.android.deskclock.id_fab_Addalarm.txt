@@ -1,0 +1,10 @@
+Opens a new alarm creation screen, allowing the user to set a new alarm time and days of the week.
+---
+Refined (2025-05-16 13:18:37):
+Adds a new alarm.
+---
+Refined (2025-05-16 13:24:04):
+Opens a new alarm creation screen where the user can set the alarm time, days of the week, and other alarm options.
+---
+Refined (2025-05-16 17:07:20):
+Opens a screen to select the time for a new alarm.

@@ -1,0 +1,1 @@
+Allows the user to input the hour for the alarm.

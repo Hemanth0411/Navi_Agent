@@ -1,0 +1,8 @@
+argparse
+colorama
+dashscope
+opencv-python
+pyyaml
+requests
+google-generativeai
+Pillow 

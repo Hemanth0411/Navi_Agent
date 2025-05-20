@@ -1,0 +1,1010 @@
+[
+    {
+        "label": "1",
+        "coords_px": [
+            128,
+            168
+        ]
+    },
+    {
+        "label": "2",
+        "coords_px": [
+            256,
+            168
+        ]
+    },
+    {
+        "label": "3",
+        "coords_px": [
+            384,
+            168
+        ]
+    },
+    {
+        "label": "4",
+        "coords_px": [
+            512,
+            168
+        ]
+    },
+    {
+        "label": "5",
+        "coords_px": [
+            640,
+            168
+        ]
+    },
+    {
+        "label": "6",
+        "coords_px": [
+            768,
+            168
+        ]
+    },
+    {
+        "label": "7",
+        "coords_px": [
+            896,
+            168
+        ]
+    },
+    {
+        "label": "8",
+        "coords_px": [
+            1024,
+            168
+        ]
+    },
+    {
+        "label": "9",
+        "coords_px": [
+            1152,
+            168
+        ]
+    },
+    {
+        "label": "1a",
+        "coords_px": [
+            128,
+            336
+        ]
+    },
+    {
+        "label": "2a",
+        "coords_px": [
+            256,
+            336
+        ]
+    },
+    {
+        "label": "3a",
+        "coords_px": [
+            384,
+            336
+        ]
+    },
+    {
+        "label": "4a",
+        "coords_px": [
+            512,
+            336
+        ]
+    },
+    {
+        "label": "5a",
+        "coords_px": [
+            640,
+            336
+        ]
+    },
+    {
+        "label": "6a",
+        "coords_px": [
+            768,
+            336
+        ]
+    },
+    {
+        "label": "7a",
+        "coords_px": [
+            896,
+            336
+        ]
+    },
+    {
+        "label": "8a",
+        "coords_px": [
+            1024,
+            336
+        ]
+    },
+    {
+        "label": "9a",
+        "coords_px": [
+            1152,
+            336
+        ]
+    },
+    {
+        "label": "1b",
+        "coords_px": [
+            128,
+            504
+        ]
+    },
+    {
+        "label": "2b",
+        "coords_px": [
+            256,
+            504
+        ]
+    },
+    {
+        "label": "3b",
+        "coords_px": [
+            384,
+            504
+        ]
+    },
+    {
+        "label": "4b",
+        "coords_px": [
+            512,
+            504
+        ]
+    },
+    {
+        "label": "5b",
+        "coords_px": [
+            640,
+            504
+        ]
+    },
+    {
+        "label": "6b",
+        "coords_px": [
+            768,
+            504
+        ]
+    },
+    {
+        "label": "7b",
+        "coords_px": [
+            896,
+            504
+        ]
+    },
+    {
+        "label": "8b",
+        "coords_px": [
+            1024,
+            504
+        ]
+    },
+    {
+        "label": "9b",
+        "coords_px": [
+            1152,
+            504
+        ]
+    },
+    {
+        "label": "1c",
+        "coords_px": [
+            128,
+            672
+        ]
+    },
+    {
+        "label": "2c",
+        "coords_px": [
+            256,
+            672
+        ]
+    },
+    {
+        "label": "3c",
+        "coords_px": [
+            384,
+            672
+        ]
+    },
+    {
+        "label": "4c",
+        "coords_px": [
+            512,
+            672
+        ]
+    },
+    {
+        "label": "5c",
+        "coords_px": [
+            640,
+            672
+        ]
+    },
+    {
+        "label": "6c",
+        "coords_px": [
+            768,
+            672
+        ]
+    },
+    {
+        "label": "7c",
+        "coords_px": [
+            896,
+            672
+        ]
+    },
+    {
+        "label": "8c",
+        "coords_px": [
+            1024,
+            672
+        ]
+    },
+    {
+        "label": "9c",
+        "coords_px": [
+            1152,
+            672
+        ]
+    },
+    {
+        "label": "10",
+        "coords_px": [
+            128,
+            840
+        ]
+    },
+    {
+        "label": "11",
+        "coords_px": [
+            256,
+            840
+        ]
+    },
+    {
+        "label": "12",
+        "coords_px": [
+            384,
+            840
+        ]
+    },
+    {
+        "label": "13",
+        "coords_px": [
+            512,
+            840
+        ]
+    },
+    {
+        "label": "14",
+        "coords_px": [
+            640,
+            840
+        ]
+    },
+    {
+        "label": "15",
+        "coords_px": [
+            768,
+            840
+        ]
+    },
+    {
+        "label": "16",
+        "coords_px": [
+            896,
+            840
+        ]
+    },
+    {
+        "label": "17",
+        "coords_px": [
+            1024,
+            840
+        ]
+    },
+    {
+        "label": "18",
+        "coords_px": [
+            1152,
+            840
+        ]
+    },
+    {
+        "label": "1a",
+        "coords_px": [
+            128,
+            1008
+        ]
+    },
+    {
+        "label": "2a",
+        "coords_px": [
+            256,
+            1008
+        ]
+    },
+    {
+        "label": "3a",
+        "coords_px": [
+            384,
+            1008
+        ]
+    },
+    {
+        "label": "4a",
+        "coords_px": [
+            512,
+            1008
+        ]
+    },
+    {
+        "label": "5a",
+        "coords_px": [
+            640,
+            1008
+        ]
+    },
+    {
+        "label": "6a",
+        "coords_px": [
+            768,
+            1008
+        ]
+    },
+    {
+        "label": "7a",
+        "coords_px": [
+            896,
+            1008
+        ]
+    },
+    {
+        "label": "8a",
+        "coords_px": [
+            1024,
+            1008
+        ]
+    },
+    {
+        "label": "9a",
+        "coords_px": [
+            1152,
+            1008
+        ]
+    },
+    {
+        "label": "1b",
+        "coords_px": [
+            128,
+            1176
+        ]
+    },
+    {
+        "label": "2b",
+        "coords_px": [
+            256,
+            1176
+        ]
+    },
+    {
+        "label": "3b",
+        "coords_px": [
+            384,
+            1176
+        ]
+    },
+    {
+        "label": "4b",
+        "coords_px": [
+            512,
+            1176
+        ]
+    },
+    {
+        "label": "5b",
+        "coords_px": [
+            640,
+            1176
+        ]
+    },
+    {
+        "label": "6b",
+        "coords_px": [
+            768,
+            1176
+        ]
+    },
+    {
+        "label": "7b",
+        "coords_px": [
+            896,
+            1176
+        ]
+    },
+    {
+        "label": "8b",
+        "coords_px": [
+            1024,
+            1176
+        ]
+    },
+    {
+        "label": "9b",
+        "coords_px": [
+            1152,
+            1176
+        ]
+    },
+    {
+        "label": "1c",
+        "coords_px": [
+            128,
+            1344
+        ]
+    },
+    {
+        "label": "2c",
+        "coords_px": [
+            256,
+            1344
+        ]
+    },
+    {
+        "label": "3c",
+        "coords_px": [
+            384,
+            1344
+        ]
+    },
+    {
+        "label": "4c",
+        "coords_px": [
+            512,
+            1344
+        ]
+    },
+    {
+        "label": "5c",
+        "coords_px": [
+            640,
+            1344
+        ]
+    },
+    {
+        "label": "6c",
+        "coords_px": [
+            768,
+            1344
+        ]
+    },
+    {
+        "label": "7c",
+        "coords_px": [
+            896,
+            1344
+        ]
+    },
+    {
+        "label": "8c",
+        "coords_px": [
+            1024,
+            1344
+        ]
+    },
+    {
+        "label": "9c",
+        "coords_px": [
+            1152,
+            1344
+        ]
+    },
+    {
+        "label": "19",
+        "coords_px": [
+            128,
+            1512
+        ]
+    },
+    {
+        "label": "20",
+        "coords_px": [
+            256,
+            1512
+        ]
+    },
+    {
+        "label": "21",
+        "coords_px": [
+            384,
+            1512
+        ]
+    },
+    {
+        "label": "22",
+        "coords_px": [
+            512,
+            1512
+        ]
+    },
+    {
+        "label": "23",
+        "coords_px": [
+            640,
+            1512
+        ]
+    },
+    {
+        "label": "24",
+        "coords_px": [
+            768,
+            1512
+        ]
+    },
+    {
+        "label": "25",
+        "coords_px": [
+            896,
+            1512
+        ]
+    },
+    {
+        "label": "26",
+        "coords_px": [
+            1024,
+            1512
+        ]
+    },
+    {
+        "label": "27",
+        "coords_px": [
+            1152,
+            1512
+        ]
+    },
+    {
+        "label": "1a",
+        "coords_px": [
+            128,
+            1680
+        ]
+    },
+    {
+        "label": "2a",
+        "coords_px": [
+            256,
+            1680
+        ]
+    },
+    {
+        "label": "3a",
+        "coords_px": [
+            384,
+            1680
+        ]
+    },
+    {
+        "label": "4a",
+        "coords_px": [
+            512,
+            1680
+        ]
+    },
+    {
+        "label": "5a",
+        "coords_px": [
+            640,
+            1680
+        ]
+    },
+    {
+        "label": "6a",
+        "coords_px": [
+            768,
+            1680
+        ]
+    },
+    {
+        "label": "7a",
+        "coords_px": [
+            896,
+            1680
+        ]
+    },
+    {
+        "label": "8a",
+        "coords_px": [
+            1024,
+            1680
+        ]
+    },
+    {
+        "label": "9a",
+        "coords_px": [
+            1152,
+            1680
+        ]
+    },
+    {
+        "label": "1b",
+        "coords_px": [
+            128,
+            1848
+        ]
+    },
+    {
+        "label": "2b",
+        "coords_px": [
+            256,
+            1848
+        ]
+    },
+    {
+        "label": "3b",
+        "coords_px": [
+            384,
+            1848
+        ]
+    },
+    {
+        "label": "4b",
+        "coords_px": [
+            512,
+            1848
+        ]
+    },
+    {
+        "label": "5b",
+        "coords_px": [
+            640,
+            1848
+        ]
+    },
+    {
+        "label": "6b",
+        "coords_px": [
+            768,
+            1848
+        ]
+    },
+    {
+        "label": "7b",
+        "coords_px": [
+            896,
+            1848
+        ]
+    },
+    {
+        "label": "8b",
+        "coords_px": [
+            1024,
+            1848
+        ]
+    },
+    {
+        "label": "9b",
+        "coords_px": [
+            1152,
+            1848
+        ]
+    },
+    {
+        "label": "1c",
+        "coords_px": [
+            128,
+            2016
+        ]
+    },
+    {
+        "label": "2c",
+        "coords_px": [
+            256,
+            2016
+        ]
+    },
+    {
+        "label": "3c",
+        "coords_px": [
+            384,
+            2016
+        ]
+    },
+    {
+        "label": "4c",
+        "coords_px": [
+            512,
+            2016
+        ]
+    },
+    {
+        "label": "5c",
+        "coords_px": [
+            640,
+            2016
+        ]
+    },
+    {
+        "label": "6c",
+        "coords_px": [
+            768,
+            2016
+        ]
+    },
+    {
+        "label": "7c",
+        "coords_px": [
+            896,
+            2016
+        ]
+    },
+    {
+        "label": "8c",
+        "coords_px": [
+            1024,
+            2016
+        ]
+    },
+    {
+        "label": "9c",
+        "coords_px": [
+            1152,
+            2016
+        ]
+    },
+    {
+        "label": "28",
+        "coords_px": [
+            128,
+            2184
+        ]
+    },
+    {
+        "label": "29",
+        "coords_px": [
+            256,
+            2184
+        ]
+    },
+    {
+        "label": "30",
+        "coords_px": [
+            384,
+            2184
+        ]
+    },
+    {
+        "label": "31",
+        "coords_px": [
+            512,
+            2184
+        ]
+    },
+    {
+        "label": "32",
+        "coords_px": [
+            640,
+            2184
+        ]
+    },
+    {
+        "label": "33",
+        "coords_px": [
+            768,
+            2184
+        ]
+    },
+    {
+        "label": "34",
+        "coords_px": [
+            896,
+            2184
+        ]
+    },
+    {
+        "label": "35",
+        "coords_px": [
+            1024,
+            2184
+        ]
+    },
+    {
+        "label": "36",
+        "coords_px": [
+            1152,
+            2184
+        ]
+    },
+    {
+        "label": "1a",
+        "coords_px": [
+            128,
+            2352
+        ]
+    },
+    {
+        "label": "2a",
+        "coords_px": [
+            256,
+            2352
+        ]
+    },
+    {
+        "label": "3a",
+        "coords_px": [
+            384,
+            2352
+        ]
+    },
+    {
+        "label": "4a",
+        "coords_px": [
+            512,
+            2352
+        ]
+    },
+    {
+        "label": "5a",
+        "coords_px": [
+            640,
+            2352
+        ]
+    },
+    {
+        "label": "6a",
+        "coords_px": [
+            768,
+            2352
+        ]
+    },
+    {
+        "label": "7a",
+        "coords_px": [
+            896,
+            2352
+        ]
+    },
+    {
+        "label": "8a",
+        "coords_px": [
+            1024,
+            2352
+        ]
+    },
+    {
+        "label": "9a",
+        "coords_px": [
+            1152,
+            2352
+        ]
+    },
+    {
+        "label": "1b",
+        "coords_px": [
+            128,
+            2520
+        ]
+    },
+    {
+        "label": "2b",
+        "coords_px": [
+            256,
+            2520
+        ]
+    },
+    {
+        "label": "3b",
+        "coords_px": [
+            384,
+            2520
+        ]
+    },
+    {
+        "label": "4b",
+        "coords_px": [
+            512,
+            2520
+        ]
+    },
+    {
+        "label": "5b",
+        "coords_px": [
+            640,
+            2520
+        ]
+    },
+    {
+        "label": "6b",
+        "coords_px": [
+            768,
+            2520
+        ]
+    },
+    {
+        "label": "7b",
+        "coords_px": [
+            896,
+            2520
+        ]
+    },
+    {
+        "label": "8b",
+        "coords_px": [
+            1024,
+            2520
+        ]
+    },
+    {
+        "label": "9b",
+        "coords_px": [
+            1152,
+            2520
+        ]
+    },
+    {
+        "label": "1c",
+        "coords_px": [
+            128,
+            2688
+        ]
+    },
+    {
+        "label": "2c",
+        "coords_px": [
+            256,
+            2688
+        ]
+    },
+    {
+        "label": "3c",
+        "coords_px": [
+            384,
+            2688
+        ]
+    },
+    {
+        "label": "4c",
+        "coords_px": [
+            512,
+            2688
+        ]
+    },
+    {
+        "label": "5c",
+        "coords_px": [
+            640,
+            2688
+        ]
+    },
+    {
+        "label": "6c",
+        "coords_px": [
+            768,
+            2688
+        ]
+    },
+    {
+        "label": "7c",
+        "coords_px": [
+            896,
+            2688
+        ]
+    },
+    {
+        "label": "8c",
+        "coords_px": [
+            1024,
+            2688
+        ]
+    },
+    {
+        "label": "9c",
+        "coords_px": [
+            1152,
+            2688
+        ]
+    }
+]

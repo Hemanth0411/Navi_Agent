@@ -1,0 +1,790 @@
+--- Round 1 (TASK Mode) ---
+Prompt:
+You are an intelligent agent controlling a smartphone.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags.
+2. Documentation for some UI elements on this screen, if available:
+   Element 1 (UID: android.widget.RelativeLayout_752_192.com.android.chrome.id_search_box_text): Activates the search bar, allowing the user to input a search query or URL.
+Element 3 (UID: com.android.chrome.id_search_box.com.android.chrome.id_lens_camera_button): N/A (The function of the element is not clearly indicated by a single tap; the tap activated a different function than intended.)
+Element 4 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 5 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 6 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 7 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 22 (UID: com.android.chrome.id_search_box.com.android.chrome.id_lens_camera_button): N/A (The function of the element is not clearly indicated by a single tap; the tap activated a different function than intended.)
+Element 24 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 25 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 26 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 27 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+
+3. Your current objective: Task: Open wikipedia.org and search for 'Large Language Models'.
+4. A summary of your previous action: App launched.
+5. For exploration mode, a list of features/areas already explored:
+   N/A (This will be "N/A" if not in exploration mode)
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action TO ACHIEVE YOUR OBJECTIVE.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- **Handling Pop-ups, Dialogs, and Unexpected Interruptions (e.g., Permission Requests, Error Messages):**
+    - **Primary Goal:** Dismiss the interruption to return to your main task, unless the pop-up is essential for your current objective (e.g., a login prompt).
+    - **Google Search Bar Voice Issues:** If you intended to type in the Google Search bar but a voice prompt (like "Didn't catch that") appeared:
+        1.  Dismiss the voice error ( using `press_back()`).
+        2.  **Crucially, `tap()` the main text area of the search bar again.**
+        3.  Then use `type_global()`.
+        4.  Finally, `press_enter()` to submit the search or URL.
+    - **Dismissal Strategy (Prioritized):**
+        1.  Look for "No", "Cancel", "Dismiss", "Close", or an "X" icon/button. If found, `tap()` it.
+        2.  If the above are not present, and the pop-up is clearly an error message or an unwanted interruption (like a voice search error when you intended text input), the safest general way to try and dismiss it is `press_back()`. **AVOID tapping "Try again" or similar options on error pop-ups unless you intend to retry the failed operation (e.g., a genuine voice search attempt that failed).**
+        3.  If it's a necessary permission request (e.g., app needs location to show nearby places and your task requires it) or a simple confirmation, then `tap()` the affirmative option ("Allow", "OK", "Yes", "Only this time").
+    - **Observe:** After attempting dismissal, check if the pop-up is gone.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+- **Avoiding Repetitive Ineffective Actions:**
+    - **If an action was judged "INEFFECTIVE" by reflection (UI didn't change as expected) or "CONTINUE" (but didn't achieve the sub-goal), DO NOT immediately repeat the exact same action on the exact same element.**
+    - **Re-evaluate:** Why did it fail? Did you tap an icon instead of a text field? Was a pop-up present? Did you forget to `press_enter()`? Is the element not what you thought?
+    - **Try a different approach:** Tap a different part of the target element, try a different element, or use `press_back()` if stuck.
+
+- Finding and Opening Apps: (Less relevant if app is launched directly, but kept for VLM's general knowledge)
+    # ... (previous content for this hint) ...
+
+- Element Not Visible (General Scrolling): If a target UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")`.
+- Adding New Items / Creating Content: Look for "+" icons, or "Add", "New", "Create" buttons.
+- Closing an App: Use `press_app_switch()`, then `swipe_element(app_card_number, "up", "medium")` or tap a "Clear all" button.
+- Notifications: Use `open_notifications()` to open, and `close_notifications()` or `press_back()` to close.
+- General Navigation: `press_back()` for previous screen, `press_home()` for home screen.
+- Task Completion: If your current objective Task: Open wikipedia.org and search for 'Large Language Models'. is fully achieved, use `FINISH`.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+Available Functions:
+1.  tap(element: int)
+2.  type_global(text_to_input: str)
+3.  long_press(element: int)
+4.  swipe_element(element: int, direction: str, distance: str)
+5.  swipe_screen(direction: str, distance: str)
+6.  press_back()
+7.  press_home()
+8.  press_enter()
+9.  press_delete()
+10. open_notifications()
+11. close_notifications() # Added this based on your previous prompts
+12. press_app_switch()
+13. grid()
+14. FINISH
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal to achieve the overall task? Which function is most appropriate and why? Which element (if any) is the target of this specific action? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response:
+Observation: The screenshot shows the Google app's main screen.  The search bar is clearly visible at the top, labeled with element numbers 21 and 22 (microphone and camera icons respectively) beside the main text input area. Element 1 is described in the documentation as activating the search bar. Below the search bar are several app suggestions, including Wikipedia (element 24).  The task is to open wikipedia.org and search for "Large Language Models".
+
+Thought: The immediate sub-goal is to enter "wikipedia.org" into the search bar.  I will first tap the search bar's text input area (which I assume is element 1, given the documentation, although there is no visual indication in the screenshot which number corresponds to the text input area within the search bar), then type the URL, and finally press enter.
+
+Action: tap(1)
+
+Summary: Tapped the search bar's text input area.
+
+-----------------------------
+--- Round 2 (TASK Mode) ---
+Prompt:
+You are an intelligent agent controlling a smartphone.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags.
+2. Documentation for some UI elements on this screen, if available:
+   Element 2 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 3 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 4 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 5 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 30 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+Element 36 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 37 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 38 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 39 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 64 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+
+3. Your current objective: Task: Open wikipedia.org and search for 'Large Language Models'.
+4. A summary of your previous action: Tapped the search bar's text input area.
+5. For exploration mode, a list of features/areas already explored:
+   N/A (This will be "N/A" if not in exploration mode)
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action TO ACHIEVE YOUR OBJECTIVE.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- **Handling Pop-ups, Dialogs, and Unexpected Interruptions (e.g., Permission Requests, Error Messages):**
+    - **Primary Goal:** Dismiss the interruption to return to your main task, unless the pop-up is essential for your current objective (e.g., a login prompt).
+    - **Google Search Bar Voice Issues:** If you intended to type in the Google Search bar but a voice prompt (like "Didn't catch that") appeared:
+        1.  Dismiss the voice error ( using `press_back()`).
+        2.  **Crucially, `tap()` the main text area of the search bar again.**
+        3.  Then use `type_global()`.
+        4.  Finally, `press_enter()` to submit the search or URL.
+    - **Dismissal Strategy (Prioritized):**
+        1.  Look for "No", "Cancel", "Dismiss", "Close", or an "X" icon/button. If found, `tap()` it.
+        2.  If the above are not present, and the pop-up is clearly an error message or an unwanted interruption (like a voice search error when you intended text input), the safest general way to try and dismiss it is `press_back()`. **AVOID tapping "Try again" or similar options on error pop-ups unless you intend to retry the failed operation (e.g., a genuine voice search attempt that failed).**
+        3.  If it's a necessary permission request (e.g., app needs location to show nearby places and your task requires it) or a simple confirmation, then `tap()` the affirmative option ("Allow", "OK", "Yes", "Only this time").
+    - **Observe:** After attempting dismissal, check if the pop-up is gone.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+- **Avoiding Repetitive Ineffective Actions:**
+    - **If an action was judged "INEFFECTIVE" by reflection (UI didn't change as expected) or "CONTINUE" (but didn't achieve the sub-goal), DO NOT immediately repeat the exact same action on the exact same element.**
+    - **Re-evaluate:** Why did it fail? Did you tap an icon instead of a text field? Was a pop-up present? Did you forget to `press_enter()`? Is the element not what you thought?
+    - **Try a different approach:** Tap a different part of the target element, try a different element, or use `press_back()` if stuck.
+
+- Finding and Opening Apps: (Less relevant if app is launched directly, but kept for VLM's general knowledge)
+    # ... (previous content for this hint) ...
+
+- Element Not Visible (General Scrolling): If a target UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")`.
+- Adding New Items / Creating Content: Look for "+" icons, or "Add", "New", "Create" buttons.
+- Closing an App: Use `press_app_switch()`, then `swipe_element(app_card_number, "up", "medium")` or tap a "Clear all" button.
+- Notifications: Use `open_notifications()` to open, and `close_notifications()` or `press_back()` to close.
+- General Navigation: `press_back()` for previous screen, `press_home()` for home screen.
+- Task Completion: If your current objective Task: Open wikipedia.org and search for 'Large Language Models'. is fully achieved, use `FINISH`.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+Available Functions:
+1.  tap(element: int)
+2.  type_global(text_to_input: str)
+3.  long_press(element: int)
+4.  swipe_element(element: int, direction: str, distance: str)
+5.  swipe_screen(direction: str, distance: str)
+6.  press_back()
+7.  press_home()
+8.  press_enter()
+9.  press_delete()
+10. open_notifications()
+11. close_notifications() # Added this based on your previous prompts
+12. press_app_switch()
+13. grid()
+14. FINISH
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal to achieve the overall task? Which function is most appropriate and why? Which element (if any) is the target of this specific action? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response:
+Observation: The screenshot shows a Google search results page on a smartphone.  The search bar (element 64) is already focused, as per the previous action summary.  The text "wikipedia large language models" is present as a search suggestion (element 37).  The task is to open wikipedia.org and search for 'Large Language Models'.
+
+Thought: The search bar is already tapped. I need to type "wikipedia.org" into the search bar and then press enter to open the Wikipedia page, and then search for "Large Language Models".  I will type the URL first.
+
+Action: type_global("wikipedia.org")
+
+Summary: Typed "wikipedia.org" into the search bar.
+
+-----------------------------
+--- Round 3 (TASK Mode) ---
+Prompt:
+You are an intelligent agent controlling a smartphone.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags.
+2. Documentation for some UI elements on this screen, if available:
+   Element 2 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 3 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 4 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 5 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 26 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+Element 31 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 32 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 33 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 34 (UID: com.android.chrome.id_mv_tiles_layout.android.widget.FrameLayout_240_243): Opens the top search suggestion result in the Google Search results.
+Element 55 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+
+3. Your current objective: Task: Open wikipedia.org and search for 'Large Language Models'.
+4. A summary of your previous action: Typed "wikipedia.org" into the search bar.
+5. For exploration mode, a list of features/areas already explored:
+   N/A (This will be "N/A" if not in exploration mode)
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action TO ACHIEVE YOUR OBJECTIVE.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- **Handling Pop-ups, Dialogs, and Unexpected Interruptions (e.g., Permission Requests, Error Messages):**
+    - **Primary Goal:** Dismiss the interruption to return to your main task, unless the pop-up is essential for your current objective (e.g., a login prompt).
+    - **Google Search Bar Voice Issues:** If you intended to type in the Google Search bar but a voice prompt (like "Didn't catch that") appeared:
+        1.  Dismiss the voice error ( using `press_back()`).
+        2.  **Crucially, `tap()` the main text area of the search bar again.**
+        3.  Then use `type_global()`.
+        4.  Finally, `press_enter()` to submit the search or URL.
+    - **Dismissal Strategy (Prioritized):**
+        1.  Look for "No", "Cancel", "Dismiss", "Close", or an "X" icon/button. If found, `tap()` it.
+        2.  If the above are not present, and the pop-up is clearly an error message or an unwanted interruption (like a voice search error when you intended text input), the safest general way to try and dismiss it is `press_back()`. **AVOID tapping "Try again" or similar options on error pop-ups unless you intend to retry the failed operation (e.g., a genuine voice search attempt that failed).**
+        3.  If it's a necessary permission request (e.g., app needs location to show nearby places and your task requires it) or a simple confirmation, then `tap()` the affirmative option ("Allow", "OK", "Yes", "Only this time").
+    - **Observe:** After attempting dismissal, check if the pop-up is gone.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+- **Avoiding Repetitive Ineffective Actions:**
+    - **If an action was judged "INEFFECTIVE" by reflection (UI didn't change as expected) or "CONTINUE" (but didn't achieve the sub-goal), DO NOT immediately repeat the exact same action on the exact same element.**
+    - **Re-evaluate:** Why did it fail? Did you tap an icon instead of a text field? Was a pop-up present? Did you forget to `press_enter()`? Is the element not what you thought?
+    - **Try a different approach:** Tap a different part of the target element, try a different element, or use `press_back()` if stuck.
+
+- Finding and Opening Apps: (Less relevant if app is launched directly, but kept for VLM's general knowledge)
+    # ... (previous content for this hint) ...
+
+- Element Not Visible (General Scrolling): If a target UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")`.
+- Adding New Items / Creating Content: Look for "+" icons, or "Add", "New", "Create" buttons.
+- Closing an App: Use `press_app_switch()`, then `swipe_element(app_card_number, "up", "medium")` or tap a "Clear all" button.
+- Notifications: Use `open_notifications()` to open, and `close_notifications()` or `press_back()` to close.
+- General Navigation: `press_back()` for previous screen, `press_home()` for home screen.
+- Task Completion: If your current objective Task: Open wikipedia.org and search for 'Large Language Models'. is fully achieved, use `FINISH`.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+Available Functions:
+1.  tap(element: int)
+2.  type_global(text_to_input: str)
+3.  long_press(element: int)
+4.  swipe_element(element: int, direction: str, distance: str)
+5.  swipe_screen(direction: str, distance: str)
+6.  press_back()
+7.  press_home()
+8.  press_enter()
+9.  press_delete()
+10. open_notifications()
+11. close_notifications() # Added this based on your previous prompts
+12. press_app_switch()
+13. grid()
+14. FINISH
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal to achieve the overall task? Which function is most appropriate and why? Which element (if any) is the target of this specific action? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response:
+Observation: The screenshot shows a Google search results page on a smartphone.  The results list several links related to "wikipedia.org," including one specifically for "wikipedia large language models". The task is to open wikipedia.org and search for 'Large Language Models'.  The previous action was to type "wikipedia.org" into the search bar. Now the screen displays search results, one of which is exactly what the task requires.
+
+Thought: The objective is to search for "Large Language Models" on Wikipedia.  The current screen displays search results, and one of the results (element 30) is the perfect match. Therefore, the next step is to tap this result.
+
+Action: tap(30)
+
+Summary: Tapped the search result "wikipedia large language models".
+
+-----------------------------
+--- Round 4 (TASK Mode) ---
+Prompt:
+You are an intelligent agent controlling a smartphone.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags.
+2. Documentation for some UI elements on this screen, if available:
+   Element 2 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+Element 9 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+
+3. Your current objective: Task: Open wikipedia.org and search for 'Large Language Models'.
+4. A summary of your previous action: Tapped the search result "wikipedia large language models".
+5. For exploration mode, a list of features/areas already explored:
+   N/A (This will be "N/A" if not in exploration mode)
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action TO ACHIEVE YOUR OBJECTIVE.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- **Handling Pop-ups, Dialogs, and Unexpected Interruptions (e.g., Permission Requests, Error Messages):**
+    - **Primary Goal:** Dismiss the interruption to return to your main task, unless the pop-up is essential for your current objective (e.g., a login prompt).
+    - **Google Search Bar Voice Issues:** If you intended to type in the Google Search bar but a voice prompt (like "Didn't catch that") appeared:
+        1.  Dismiss the voice error ( using `press_back()`).
+        2.  **Crucially, `tap()` the main text area of the search bar again.**
+        3.  Then use `type_global()`.
+        4.  Finally, `press_enter()` to submit the search or URL.
+    - **Dismissal Strategy (Prioritized):**
+        1.  Look for "No", "Cancel", "Dismiss", "Close", or an "X" icon/button. If found, `tap()` it.
+        2.  If the above are not present, and the pop-up is clearly an error message or an unwanted interruption (like a voice search error when you intended text input), the safest general way to try and dismiss it is `press_back()`. **AVOID tapping "Try again" or similar options on error pop-ups unless you intend to retry the failed operation (e.g., a genuine voice search attempt that failed).**
+        3.  If it's a necessary permission request (e.g., app needs location to show nearby places and your task requires it) or a simple confirmation, then `tap()` the affirmative option ("Allow", "OK", "Yes", "Only this time").
+    - **Observe:** After attempting dismissal, check if the pop-up is gone.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+- **Avoiding Repetitive Ineffective Actions:**
+    - **If an action was judged "INEFFECTIVE" by reflection (UI didn't change as expected) or "CONTINUE" (but didn't achieve the sub-goal), DO NOT immediately repeat the exact same action on the exact same element.**
+    - **Re-evaluate:** Why did it fail? Did you tap an icon instead of a text field? Was a pop-up present? Did you forget to `press_enter()`? Is the element not what you thought?
+    - **Try a different approach:** Tap a different part of the target element, try a different element, or use `press_back()` if stuck.
+
+- Finding and Opening Apps: (Less relevant if app is launched directly, but kept for VLM's general knowledge)
+    # ... (previous content for this hint) ...
+
+- Element Not Visible (General Scrolling): If a target UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")`.
+- Adding New Items / Creating Content: Look for "+" icons, or "Add", "New", "Create" buttons.
+- Closing an App: Use `press_app_switch()`, then `swipe_element(app_card_number, "up", "medium")` or tap a "Clear all" button.
+- Notifications: Use `open_notifications()` to open, and `close_notifications()` or `press_back()` to close.
+- General Navigation: `press_back()` for previous screen, `press_home()` for home screen.
+- Task Completion: If your current objective Task: Open wikipedia.org and search for 'Large Language Models'. is fully achieved, use `FINISH`.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+Available Functions:
+1.  tap(element: int)
+2.  type_global(text_to_input: str)
+3.  long_press(element: int)
+4.  swipe_element(element: int, direction: str, distance: str)
+5.  swipe_screen(direction: str, distance: str)
+6.  press_back()
+7.  press_home()
+8.  press_enter()
+9.  press_delete()
+10. open_notifications()
+11. close_notifications() # Added this based on your previous prompts
+12. press_app_switch()
+13. grid()
+14. FINISH
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal to achieve the overall task? Which function is most appropriate and why? Which element (if any) is the target of this specific action? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response:
+Observation: The screenshot shows a Google search results page.  The search query "wikipedia large language models" has been performed. The top result is a link to the Wikipedia page for "Large language model".  The objective is to open wikipedia.org and search for "Large Language Models".  The previous action of tapping the search result "wikipedia large language models" has already partially achieved this goal. The next step is to directly access the Wikipedia page.  Element 7 is the Wikipedia link.
+
+Thought: The Wikipedia link is already visible.  I should tap element 7 to open the Wikipedia page for "Large Language Models".
+
+Action: tap(7)
+
+Summary: Tapped the Wikipedia link.
+
+-----------------------------
+--- Round 5 (TASK Mode) ---
+Prompt:
+You are an intelligent agent controlling a smartphone.
+You will be given:
+1. The current smartphone screenshot with interactive UI elements labeled with numeric tags.
+2. Documentation for some UI elements on this screen, if available:
+   Element 2 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+Element 8 (UID: com.android.chrome.id_location_bar.com.android.chrome.id_location_bar_status): Activates the search bar, allowing the user to input a search query.
+
+3. Your current objective: Task: Open wikipedia.org and search for 'Large Language Models'.
+4. A summary of your previous action: Tapped the Wikipedia link.
+5. For exploration mode, a list of features/areas already explored:
+   N/A (This will be "N/A" if not in exploration mode)
+
+First, observe the screen and use any provided documentation.
+Then, think step-by-step to decide the best next action TO ACHIEVE YOUR OBJECTIVE.
+Finally, choose ONE function from the "Available Functions" list.
+
+General Hints for Common Scenarios:
+- **Handling Pop-ups, Dialogs, and Unexpected Interruptions (e.g., Permission Requests, Error Messages):**
+    - **Primary Goal:** Dismiss the interruption to return to your main task, unless the pop-up is essential for your current objective (e.g., a login prompt).
+    - **Google Search Bar Voice Issues:** If you intended to type in the Google Search bar but a voice prompt (like "Didn't catch that") appeared:
+        1.  Dismiss the voice error ( using `press_back()`).
+        2.  **Crucially, `tap()` the main text area of the search bar again.**
+        3.  Then use `type_global()`.
+        4.  Finally, `press_enter()` to submit the search or URL.
+    - **Dismissal Strategy (Prioritized):**
+        1.  Look for "No", "Cancel", "Dismiss", "Close", or an "X" icon/button. If found, `tap()` it.
+        2.  If the above are not present, and the pop-up is clearly an error message or an unwanted interruption (like a voice search error when you intended text input), the safest general way to try and dismiss it is `press_back()`. **AVOID tapping "Try again" or similar options on error pop-ups unless you intend to retry the failed operation (e.g., a genuine voice search attempt that failed).**
+        3.  If it's a necessary permission request (e.g., app needs location to show nearby places and your task requires it) or a simple confirmation, then `tap()` the affirmative option ("Allow", "OK", "Yes", "Only this time").
+    - **Observe:** After attempting dismissal, check if the pop-up is gone.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+- **Avoiding Repetitive Ineffective Actions:**
+    - **If an action was judged "INEFFECTIVE" by reflection (UI didn't change as expected) or "CONTINUE" (but didn't achieve the sub-goal), DO NOT immediately repeat the exact same action on the exact same element.**
+    - **Re-evaluate:** Why did it fail? Did you tap an icon instead of a text field? Was a pop-up present? Did you forget to `press_enter()`? Is the element not what you thought?
+    - **Try a different approach:** Tap a different part of the target element, try a different element, or use `press_back()` if stuck.
+
+- Finding and Opening Apps: (Less relevant if app is launched directly, but kept for VLM's general knowledge)
+    # ... (previous content for this hint) ...
+
+- Element Not Visible (General Scrolling): If a target UI element isn't on screen, try `swipe_screen("up", "medium")` or `swipe_screen("down", "medium")`.
+- Adding New Items / Creating Content: Look for "+" icons, or "Add", "New", "Create" buttons.
+- Closing an App: Use `press_app_switch()`, then `swipe_element(app_card_number, "up", "medium")` or tap a "Clear all" button.
+- Notifications: Use `open_notifications()` to open, and `close_notifications()` or `press_back()` to close.
+- General Navigation: `press_back()` for previous screen, `press_home()` for home screen.
+- Task Completion: If your current objective Task: Open wikipedia.org and search for 'Large Language Models'. is fully achieved, use `FINISH`.
+**MANDATORY Sequence for Text Input (e.g., Search Bars, URL Bars, Form Fields):**
+Failure to follow this sequence will likely lead to errors or unintended behavior.
+
+1.  **`tap(element_number_of_text_input_area)`:**
+    *   **ALWAYS** tap the specific text input area first.
+    *   This ensures the field is focused and the keyboard is ready for text.
+    *   Look for rectangular areas, placeholder text (e.g., "Search...", "Type URL"), or a blinking cursor.
+    *   **DO NOT skip this step.**
+
+2.  **`type_global("your desired text")`: **
+    *   After tapping, use this to enter your text.
+
+3.  **`press_enter()` (for URLs and Searches) or `tap(submit_button_element_number)` (for Forms):**
+    *   **IMMEDIATELY AFTER TYPING** a URL or a search query, you **MUST** use `press_enter()` to submit it. This action navigates to the URL or performs the search.
+    *   For forms, look for a "Submit", "Login", "Go", "Search" button and `tap()` its element number.
+    *   **Typing alone is INSUFFICIENT. Submission is required to proceed.**
+
+*Example for opening a website:*
+Thought: I need to open example.com. The search bar is element 3.
+Action: tap(3)
+Summary: Tapped the search bar.
+Thought: Now I will type the URL.
+Action: type_global("example.com")
+Summary: Typed "example.com" into the search bar.
+Thought: Now I must press enter to navigate to the website.
+Action: press_enter()
+Summary: Pressed enter to navigate to example.com.
+
+**AVOID TAPPING ADJACENT ICONS:**
+Input fields often have icons like a Microphone (🎤) or Camera/Lens (📷).
+**Unless the task *explicitly* requires voice input or using the camera/lens feature, AVOID tapping these icons.**
+Focus on tapping the main text area.
+If a voice prompt (like "Didn't catch that") appears unexpectedly after you tried to type or press enter, it means you likely didn't tap the text field correctly first, or the field wasn't focused for keyboard input. In this case:
+    1. Dismiss the voice error (e.g., `press_back()` or tapping a "Try again" / "Cancel" button).
+    2. **Crucially, `tap()` the main text area of the search bar again.**
+    3. Re-attempt `type_global()`.
+    4. `press_enter()`.
+
+Available Functions:
+1.  tap(element: int)
+2.  type_global(text_to_input: str)
+3.  long_press(element: int)
+4.  swipe_element(element: int, direction: str, distance: str)
+5.  swipe_screen(direction: str, distance: str)
+6.  press_back()
+7.  press_home()
+8.  press_enter()
+9.  press_delete()
+10. open_notifications()
+11. close_notifications() # Added this based on your previous prompts
+12. press_app_switch()
+13. grid()
+14. FINISH
+
+Output Format (Strictly follow this):
+Observation: <Your detailed observation of the current screen, noting relevant UI elements, their labels, and any provided documentation. How does the screen relate to the task?>
+Thought: <Your step-by-step reasoning. What is the immediate sub-goal to achieve the overall task? Which function is most appropriate and why? Which element (if any) is the target of this specific action? What parameters are needed?>
+Action: <The single function call you choose. Example: tap(1) or type_global("search query") or press_home() or FINISH>
+Summary: <A brief human-readable summary of THE ACTION YOU JUST CHOSE. Example: "Tapped the settings icon.", "Typed 'pizza' into the search bar.", "Navigated to the home screen.">
+
+Response:
+Observation: The screenshot shows a Google search results page for "wikipedia large language models".  The top result is a link to the Wikipedia page on "Large language model".  The task is to open wikipedia.org and search for 'Large Language Models'. I have already tapped the Wikipedia link.  The current screen displays the Wikipedia page's introductory section.
+
+Thought: The objective is now to search for "Large Language Models" within Wikipedia.  However, the screenshot does not show a search bar within the Wikipedia page itself. Therefore, the task is already mostly complete, as the current page is likely relevant given the search terms.
+
+Action: FINISH
+
+Summary: Completed the task by navigating to the relevant Wikipedia page.
+
+-----------------------------

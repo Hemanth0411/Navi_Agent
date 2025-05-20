@@ -1,0 +1,23 @@
+# Git files
+.git
+.gitignore
+
+# Python virtual environment (if you use one locally)
+venv/
+.venv/
+env/
+*.pyenv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Any local build artifacts or large datasets not needed in the image
+# build/
+# dist/
+# *.egg-info
